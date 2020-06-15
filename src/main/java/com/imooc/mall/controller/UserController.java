@@ -40,14 +40,7 @@ public class UserController {
 
     //第二种接收方式是JSON:applicaiton/json
     //(@RequestBody User user)必须这种形式才可以
-    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm,
-                               BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            log.error("注册提交的参数有误, {} {}",
-                    bindingResult.getFieldError().getField(),
-                    bindingResult.getFieldError().getDefaultMessage());
-            return ResponseVo.error(PARAM_ERROE,bindingResult);
-        }
+    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm){
         User user = new User();
         BeanUtils.copyProperties(userRegisterForm, user);
 
@@ -59,12 +52,12 @@ public class UserController {
     //用户登录实现
     @PostMapping("/user/login")
     public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
-                                  BindingResult bindingResult,
                                   HttpSession session){
 
-        if(bindingResult.hasErrors()){
-            return ResponseVo.error(USERNAME_OR_PASSWORD_ERROR);
-        }
+        //由于在exception中做了关于做了异常处理,这里可以不用了
+//        if(bindingResult.hasErrors()){
+//            return ResponseVo.error(USERNAME_OR_PASSWORD_ERROR);
+//        }
 
         ResponseVo<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
 

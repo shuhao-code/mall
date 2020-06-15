@@ -18,8 +18,8 @@ import java.util.Date;
  * @author shuhao
  * @date 2020/6/13 11:39
  */
-//这个注解起到回滚的作用,不让测试的代码污染数据
-@Transactional
+//TODO 这个注解起到回滚的作用,不让测试的代码污染数据
+//@Transactional
 public class UserServiceImplTest extends MallApplicationTests {
 
     public static final String USERNAME = "jack";
